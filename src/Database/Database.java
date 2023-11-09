@@ -1,3 +1,5 @@
+package Database;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -12,7 +14,14 @@ public class Database {
         try {
             this.conexion = DriverManager.getConnection(url,usuario,password);
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            System.out.println("Error al abrir conexción");
         }
+    }
+
+    public static Connection getInstance(){
+        if(Database.conexion == null){
+            new Database();
+        }
+        return Database.conexion;
     }
 }
